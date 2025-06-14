@@ -6,6 +6,7 @@ import com.example.SpringBuy.dao.ProductRepository;
 import com.example.SpringBuy.model.Customer;
 import com.example.SpringBuy.model.Order;
 import com.example.SpringBuy.model.Product;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -56,5 +57,14 @@ public class SpringBuyServiceImpl {
 
     public List<Customer> getCustomer() {
         return customerRepository.findAll();
+    }
+    public Customer getCustomerById(Long id){
+        return customerRepository.findById(id).orElseThrow(()->new RuntimeException("customer not found" + id));
+    }
+    public Order getOrderById(Long id){
+        return orderRepository.findById(id).orElseThrow(()->new RuntimeException("Order not found" + id));
+    }
+    public Product getProductById(Long id){
+        return productRepository.findById(id).orElseThrow(()->new RuntimeException("Product not found" + id));
     }
 }
