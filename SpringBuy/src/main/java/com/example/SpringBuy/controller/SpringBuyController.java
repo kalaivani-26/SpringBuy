@@ -6,10 +6,7 @@ import com.example.SpringBuy.model.Product;
 import com.example.SpringBuy.service.serviceimpl.SpringBuyServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -37,18 +34,34 @@ public class SpringBuyController {
     }
 
     @GetMapping("/api/getProducts")
-    public ResponseEntity<List<Product>> GetProduct() {
+    public ResponseEntity<List<Product>> getProduct() {
         List<Product> productList = springBuyService.getProduct();
             return ResponseEntity.ok(productList);
     }
     @GetMapping("/api/getOrders")
-    public ResponseEntity<List<Order>> GetOrder() {
+    public ResponseEntity<List<Order>> getOrder() {
         List<Order> OrderList = springBuyService.getOrder();
         return ResponseEntity.ok(OrderList);
     }
     @GetMapping("/api/getCustomers")
-    public ResponseEntity<List<Customer>> GetCustomer() {
+    public ResponseEntity<List<Customer>> getCustomer() {
         List<Customer> customerList = springBuyService.getCustomer();
         return ResponseEntity.ok(customerList);
+    }
+    @GetMapping("/api/getCustomerById/{id}")
+    public ResponseEntity<Customer> getCustomerById(@PathVariable Long id) {
+        Customer customer = springBuyService.getCustomerById(id);
+        return ResponseEntity.ok(customer);
+    }
+
+    @GetMapping("/api/getOrderById/{id}")
+    public ResponseEntity<Order> getOrderById(@PathVariable Long id) {
+        Order order = springBuyService.getOrderById(id);
+        return ResponseEntity.ok(order);
+    }
+    @GetMapping("/api/getProductById/{id}")
+    public ResponseEntity<Product> GetProductById(@PathVariable Long id) {
+        Product product = springBuyService.getProductById(id);
+        return ResponseEntity.ok(product);
     }
 }
